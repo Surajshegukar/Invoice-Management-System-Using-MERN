@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import CustomerItem from "./CustomerItem";
-import systemContext from '../context/systemContext';
+import systemContext from "../../context/systemContext";
+
 function Customer() {
   const context = useContext(systemContext);
-  const {fetchCustomer,customerList,addCustomer} = context;
+  const {fetchCustomer,customerList,addCustomer,deleteCustomer} = context;
   const [customer, setCustomer] = useState({ customerName: " ", customerEmail: '',customerMobileNo:0,customerAddress:'' });
  
 
@@ -90,7 +91,7 @@ function Customer() {
           <tbody>
           {
             customerList.map((customer,index)=>{
-                return <CustomerItem key={index} index = {index} customer={customer}/>
+                return <CustomerItem key={index} index = {index} customer={customer} deleteCustomer={deleteCustomer}/>
             })
         }
           </tbody>

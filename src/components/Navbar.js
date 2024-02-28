@@ -20,7 +20,8 @@ function Navbar() {
           <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <div><Link className="dropdown-item" to="/manage/customer">Customer</Link></div>
             <div><Link className="dropdown-item" to="/manage/product">Product</Link></div>
-            <div><Link className="dropdown-item" to="/manage/invoice">Invoice Template</Link></div>
+            <div><Link className="dropdown-item" to="/manage/invoice">Create Invoice</Link></div>
+            <div><Link className="dropdown-item" to="/manage/showinvoice">Show Invoice</Link></div>
           </div>
         </div>
         

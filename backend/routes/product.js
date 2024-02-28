@@ -63,7 +63,6 @@ router.put('/updateproduct/:id', fetchuser, async (req, res) => {
   }
 })
 router.delete('/deleteproduct/:id', fetchuser, async (req, res) => {
-  const {productName,productPrice } = req.body;
   try {     
       // Find the product to be updated and update it
       let product = await Product.findById(req.params.id);

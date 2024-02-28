@@ -1,92 +1,92 @@
 
-.companyName {
+.printInvoiceContainer .companyName {
     font-size: 150%;
     font-weight: bold;
 }
 
-.phoneNum {}
+.printInvoiceContainer .phoneNum {}
 
-.email {}
+.printInvoiceContainer .email {}
 
 #Invoice{
     /* display: none; */
 }
 
-/* .header {
+/* .printInvoiceContainer .header {
     position: absolute;
     top: 1cm;
 } */
 
-h1 {
+.printInvoiceContainer h1 {
     text-align: center;
     font-size: 36px;
     color: #948fe3;
     margin-top: 3cm;
 }
 
-.floatText1 {
+.printInvoiceContainer .floatText1 {
     margin-bottom: 10px;
     
 }
 
-.billTo {
+.printInvoiceContainer .billTo {
     float: left;
 }
 
-.invoiceNo {
+.printInvoiceContainer .invoiceNo {
     float: right;
 }
 
-.floatText2 {
+.printInvoiceContainer .floatText2 {
     margin-bottom: 40px;
     
 }
 
-.companyAddress {
+.printInvoiceContainer .companyAddress {
     float: left;
 }
-.customer-phone{
+.printInvoiceContainer .customer-phone{
     
     float: left;
 }
 
-.date {
+.printInvoiceContainer .date {
     float: right;
 }
 
-table {
+.printInvoiceContainer table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-th,
-td {
+.printInvoiceContainer th,
+.printInvoiceContainer td {
     padding: 8px;
     text-align: end;
 
 }
 
-th {
+.printInvoiceContainer th {
     background-color: #948fe3 !important;
     color: white;
 }
-tfoot{
+.printInvoiceContainer tfoot{
     border-top: 1px solid ;
     border-bottom: 1px solid;
   }
 
-.rightAlign {
+.printInvoiceContainer .rightAlign {
     text-align: end;
 }
 
-tr.highlighted-row {
+tr.printInvoiceContainer .highlighted-row {
     border-top: 1px solid gray !important;
     border-bottom: 1px solid gray !important;
     font-weight: bold;
 }
 
-.table-wrapper {
+.printInvoiceContainer .table-wrapper {
     width: 90%;
     margin: auto;
     margin-top:8px ;
@@ -94,13 +94,13 @@ tr.highlighted-row {
     background-color: white;
 }
 
-.custom-table-container {
+.printInvoiceContainer .custom-table-container {
     display: flex;
     width: 100%;
     /* gap: 2px; */
 }
 
-.custom-first-table {
+.printInvoiceContainer .custom-first-table {
     width: 65%;
     margin-right: -22px;
     position: relative;
@@ -109,17 +109,17 @@ tr.highlighted-row {
     /* border:5px solid green; */
 }
 
-.custom-first-table td {
+.printInvoiceContainer .custom-first-table td {
     padding: 8px;
     text-align: left;
     width: 50px;
 }
 
-.custom-first-alternate-row {
+.printInvoiceContainer .custom-first-alternate-row {
     background-color: #f7f7f7 !important;
 }
 
-.custom-second-table {
+.printInvoiceContainer .custom-second-table {
     position: relative;
     left: 50px;
     width: 48%;
@@ -128,29 +128,29 @@ tr.highlighted-row {
 
 }
 
-.custom-second-table td {
+.printInvoiceContainer .custom-second-table td {
 
     padding: 8px;
     text-align: start;
 }
 
-.custom-second-highlighted-row {
+.printInvoiceContainer .custom-second-highlighted-row {
     background-color: #948fe3 !important;
     color: white !important;
 }
 
-.custom-second-bottom-outline-row {
+.printInvoiceContainer .custom-second-bottom-outline-row {
     border-bottom: 1px solid gray !important;
 }
 
-.signatureSpace1 {
+.printInvoiceContainer .signatureSpace1 {
     color: #2c4c54;
     margin-left: 52%;
     text-align: center;
     margin-top: 50px;
 }
 
-.signatureSpace2 {
+.printInvoiceContainer .signatureSpace2 {
     margin-left: 52%;
     text-align: center;
     margin-top: 100px;
@@ -167,12 +167,14 @@ tr.highlighted-row {
   } */
 /* ----------------------------------------------------------- */
 
-.footer{
+.printInvoiceContainer .footer{
     border: 2px solid;
     width: 99%;
     height: 40px;
 }
-.footer p{
+.printInvoiceContainer .footer p{
     
     padding: 11px;
 }
+
+    

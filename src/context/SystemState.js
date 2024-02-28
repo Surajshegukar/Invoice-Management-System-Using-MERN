@@ -1,30 +1,43 @@
 import React, { useState } from 'react'
 import systemContext from './systemContext'
-import Product from '../components/Product';
+
 
 function SystemState(props) {
     const [productList,setProductList] = useState([]);
     const [customerList,setCustomerList] = useState([]);
+    const [invoiceList,setInvoiceList] = useState([]);
 
     const fetchProduct = async() => {
         const response = await fetch('http://localhost:5000/api/product/fetchallproduct',{
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "auth-token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVjM2MwNTI4ZjM2Njk3MTNkOGJmNGQwIn0sImlhdCI6MTcwNzMyNzY2OX0.HRD3nSFnD-pjCdSOB7itCtNMCrrJAzMmC7DEE0plKbU'
+            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
         },
     });
     const json = await response.json();
     // console.log(json);
     setProductList(json);
-    
     }
+    const fetchInvoice = async() => {
+        const response = await fetch('http://localhost:5000/api/invoice/fetchallinvoice',{
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+        },
+    });
+    const json = await response.json();
+    // console.log(json);
+    setInvoiceList(json);
+    }
+
     const fetchCustomer = async() => {
         const response = await fetch('http://localhost:5000/api/customer/fetchallcustomer',{
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "auth-token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVjM2MwNTI4ZjM2Njk3MTNkOGJmNGQwIn0sImlhdCI6MTcwNzMyNzY2OX0.HRD3nSFnD-pjCdSOB7itCtNMCrrJAzMmC7DEE0plKbU'
+            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
         },
     });
     const json = await response.json();
@@ -37,7 +50,7 @@ function SystemState(props) {
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
-                "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVjM2MwNTI4ZjM2Njk3MTNkOGJmNGQwIn0sImlhdCI6MTcwNzMyNzY2OX0.HRD3nSFnD-pjCdSOB7itCtNMCrrJAzMmC7DEE0plKbU"
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
             },
             body: JSON.stringify({productName,productPrice})
         });
@@ -50,7 +63,7 @@ function SystemState(props) {
           method:"POST",
           headers:{
               "Content-Type":"application/json",
-              "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVjM2MwNTI4ZjM2Njk3MTNkOGJmNGQwIn0sImlhdCI6MTcwNzMyNzY2OX0.HRD3nSFnD-pjCdSOB7itCtNMCrrJAzMmC7DEE0plKbU"
+              "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
           },
           body: JSON.stringify({customerName,customerEmail,customerMobileNo,customerAddress})
       });
@@ -59,8 +72,46 @@ function SystemState(props) {
       console.log(tempCustomer);
       
   };
+    const addInvoice= async(
+      invoiceNumber,
+      customerName,
+      customerEmail,
+      customerMobileNo,
+      customerAddress,
+      items,
+      totalAmount,
+      date)=>{
+      const response = await fetch('http://localhost:5000/api/invoice/addinvoice',{
+          method:"POST",
+          headers:{
+              "Content-Type":"application/json",
+              "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+          },
+          body: JSON.stringify({invoiceNumber,
+            customerName,
+            customerEmail,
+            customerMobileNo,
+            customerAddress,
+            items,
+            totalAmount,
+            date})
+      });
+      const tempInvoice = await response.json();
+      setCustomerList(invoiceList.concat(tempInvoice));
+      console.log(tempInvoice);
+      
+  };
 
     const deleteProduct=async(id)=>{
+      const response = await fetch(`http://localhost:5000/api/product/deleteproduct/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+        },
+      });
+      const json = response.json();
+      console.log(json);
       //For Forntend
       const newProduct = productList.filter((ele)=>{
         return ele._id !== id;
@@ -68,8 +119,134 @@ function SystemState(props) {
       console.log("product deleted " + id);
       setProductList(newProduct);
     }
+    const deleteCustomer=async(id)=>{
+      const response = await fetch(`http://localhost:5000/api/customer/deletecustomer/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+        },
+      });
+      const json = response.json();
+      console.log(json);
+      //For Forntend
+      const newCustomer = customerList.filter((ele)=>{
+        return ele._id !== id;
+      })
+      console.log("Customer Deleted " + id);
+      setCustomerList(newCustomer);
+    }
+    const deleteInvoice=async(id)=>{
+      const response = await fetch(`http://localhost:5000/api/invoice/deleteinvoice/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+        },
+      });
+      const json = response.json();
+      console.log(json);
+      //For Forntend
+
+      const newInvoice = invoiceList.filter((ele)=>{
+        return ele._id !== id;
+      })
+      console.log("product deleted " + id);
+      setInvoiceList(newInvoice);
+    }
+
+    const editProduct = async (id,productName,productPrice) => {
+    const response = await fetch(`http://localhost:5000/api/product/updateproduct/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+      },
+      body: JSON.stringify({productName,productPrice}),
+    });
+    
+    const editedProduct = JSON.parse(JSON.stringify(productList))
+    for (let index = 0; index < editedProduct.length; index++) {
+      const element = editedProduct[index];
+      if (element._id === id) {
+        editedProduct[index].productName = productName;
+        editedProduct[index].productPrice = productPrice;
+        break;
+      }
+    }
+    setProductList(editedProduct);
+  };
+  const editCustomer = async (id,customerName,customerEmail,customerMobileNo,customerAddress) => {
+    const response = await fetch(`http://localhost:5000/api/customer/updatecustomer/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+      },
+      body: JSON.stringify({customerName,customerEmail,customerMobileNo,customerAddress}),
+    });
+    
+    const editedCustomer = JSON.parse(JSON.stringify(customerList))
+    for (let index = 0; index < editedCustomer.length; index++) {
+      const element = editedCustomer[index];
+      if (element._id === id) {
+        editedCustomer[index].customerName = customerName;
+        editedCustomer[index].customerEmail = customerEmail;
+        editedCustomer[index].customerMobileNo = customerMobileNo;
+        editedCustomer[index].customerAddress = customerAddress;
+        
+        break;
+      }
+    }
+    setCustomerList(editedCustomer);
+  };
+  const editInvoice = async (id,
+    invoiceNumber,
+    customerName,
+    customerEmail,
+    customerMobileNo,
+    customerAddress,
+    items,
+    totalAmount) => {
+    const response = await fetch(`http://localhost:5000/api/invoice/updateinvoice/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+      },
+      body: JSON.stringify({invoiceNumber,
+        customerName,
+        customerEmail,
+        customerMobileNo,
+        customerAddress,
+        items,
+        totalAmount}),
+    });
+    
+    const editedInvoice = JSON.parse(JSON.stringify(invoiceList))
+    for (let index = 0; index < editedInvoice.length; index++) {
+      const element = editedInvoice[index];
+      if (element._id === id) {
+        editedInvoice[index].invoiceNumber = invoiceNumber;
+        editedInvoice[index].customerName = customerName;
+        editedInvoice[index].customerEmail = customerEmail;
+        editedInvoice[index].customerMobileNo = customerMobileNo;
+        editedInvoice[index].customerAddress = customerAddress;
+        editedInvoice[index].items = items;
+        editedInvoice[index].totalAmount = totalAmount;
+        break;
+      }
+    }
+    setProductList(editedInvoice);
+  };
+  
   return (
-    <systemContext.Provider value={{productList,customerList,fetchProduct,fetchCustomer,addProduct,deleteProduct,addCustomer}}>
+    <systemContext.Provider value={{productList,customerList,invoiceList,
+    fetchInvoice,fetchProduct,fetchCustomer,
+    addProduct,addInvoice,addCustomer,
+    editProduct,editCustomer,editInvoice,
+    deleteCustomer,deleteInvoice,deleteProduct}}>
+
         {props.children}
     </systemContext.Provider>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 
 function CustomerItem(props) {
-    const {customer,index} = props
+    const {customer,index,deleteCustomer} = props
   return (
     <tr>
         <th scope="row">{index + 1}</th>
@@ -9,8 +9,7 @@ function CustomerItem(props) {
         <td>{customer.customerEmail}</td>
         <td>{customer.customerMobileNo}</td>
         <td>{customer.customerAddress}</td>
-        <td><i className="fa-solid fa-trash"></i></td>
-        {/* <td><a onClick={(id)=>{deleteProduct(product._id)}}><i className="fa-solid fa-trash"></i></a></td> */}
+        <td><a onClick={()=>{deleteCustomer(customer._id)}}><i className="fa-solid fa-trash"></i></a></td>
       </tr>
     
   )

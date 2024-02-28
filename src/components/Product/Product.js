@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import ShowProduct from "./ShowProduct";
-import systemContext from "../context/systemContext";
+import systemContext from "../../context/systemContext";
 
 function Product() {
   const context = useContext(systemContext);
@@ -18,6 +18,7 @@ function Product() {
   };
   useEffect(() => {
     fetchProduct();
+    
   }, []);
   return (
     <>

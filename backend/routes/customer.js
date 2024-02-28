@@ -68,7 +68,6 @@ router.put('/updatecustomer/:id', fetchuser, async (req, res) => {
   }
 })
 router.delete('/deletecustomer/:id', fetchuser, async (req, res) => {
-  const {customerName,customerEmail,customerMobileNo,customerAddress } = req.body;
   try {     
       // Find the customer to be updated and update it
       let customer = await Customer.findById(req.params.id);
