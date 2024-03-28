@@ -15,6 +15,7 @@ function PrintInvoice(props) {
   let taxAmount = total * 0.18
   const [number,setNumber] = useState(123456); // You can change this predefined number
   const [words, setWords] = useState('');
+  let oTotal = total + taxAmount;
 
   useEffect(() => {
     const result = numberToWordsConverter(number);
@@ -39,13 +40,13 @@ function PrintInvoice(props) {
           <div style={{ width: "100%", height: "100%",padding:"20px" }}>
             <div className="header">
               <div className="companyName" id="companyName">
-                Vinu Enterprises
+                GB Enterprises
              </div>
               <div className="phoneNum" id="phoneNum">
                 Phone No. 9764560267
               </div>
               <div className="email" id="email">
-                Email: morekarsantosh17@gmail.com
+                Email: GB17@gmail.com
               </div>
               <img
                 style={{
@@ -140,7 +141,7 @@ function PrintInvoice(props) {
                   </tr>
                   <tr className="custom-first-alternate-row">
                     <td>
-                      <p id="result">{numberToWordsConverter(total)}</p>
+                      <p id="result">{numberToWordsConverter(oTotal)}</p>
                     </td>
                   </tr>
                   <tr>
@@ -179,7 +180,7 @@ function PrintInvoice(props) {
                       id="oTotal"
                       style={{ textAlign: "end" }}
                     >
-                      $ {total + taxAmount.toFixed(2)}
+                      $ {oTotal}
                     </td>
                   </tr>
                   <tr>

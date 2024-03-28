@@ -6,7 +6,7 @@ import PrintInvoice from "./PrintInvoice";
 
 const Invoice = () => {
   const context = useContext(systemContext)
-  const {addInvoice} = context;
+  const {addInvoice,productList} = context;
   const modalContentRef = useRef(null);
   
   
@@ -171,7 +171,17 @@ const Invoice = () => {
                 id="floatingInput"
                 placeholder="Product Name"
                 required
+                list="options"
               />
+              <datalist id="options">
+                {productList.map((product,index)=>{
+                  return(
+                    <option key={index} value={product.productName} />
+                  )
+                }
+                )}
+              </datalist>
+              
               <label htmlFor="floatingInput">Product Name</label>
             </div>
             <div className="form-floating mb-3 w-25">
