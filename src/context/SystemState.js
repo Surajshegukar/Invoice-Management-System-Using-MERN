@@ -206,8 +206,7 @@ function SystemState(props) {
     customerEmail,
     customerMobileNo,
     customerAddress,
-    items,
-    totalAmount) => {
+    items) => {
     const response = await fetch(`http://localhost:5000/api/invoice/updateinvoice/${id}`, {
       method: "PUT",
       headers: {
@@ -219,8 +218,7 @@ function SystemState(props) {
         customerEmail,
         customerMobileNo,
         customerAddress,
-        items,
-        totalAmount}),
+        items}),
     });
     
     const editedInvoice = JSON.parse(JSON.stringify(invoiceList))
@@ -233,7 +231,7 @@ function SystemState(props) {
         editedInvoice[index].customerMobileNo = customerMobileNo;
         editedInvoice[index].customerAddress = customerAddress;
         editedInvoice[index].items = items;
-        editedInvoice[index].totalAmount = totalAmount;
+      
         break;
       }
     }

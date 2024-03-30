@@ -36,17 +36,17 @@ function PrintInvoice(props) {
     <div ref={modalContentRef}>
       <div className="container border border-1 printInvoiceContainer">
         <div id="Invoice">
-        <PDFExport ref={pdfref} fileName="invoice" paperSize="A3">
+        <PDFExport ref={pdfref} fileName="invoice" paperSize="A2">
           <div style={{ width: "100%", height: "100%",padding:"20px" }}>
             <div className="header">
               <div className="companyName" id="companyName">
-                GB Enterprises
+                Vinu Enterprises
              </div>
               <div className="phoneNum" id="phoneNum">
                 Phone No. 9764560267
               </div>
               <div className="email" id="email">
-                Email: GB17@gmail.com
+                Email: more.santosh17@gmail.com
               </div>
               <img
                 style={{
@@ -133,7 +133,7 @@ function PrintInvoice(props) {
                 </tr>
               </tfoot>
             </table>
-            <div className="table-wrapper">
+            <div className="table-wrapper mx-7">
               <div className="custom-table-container">
                 <table className="custom-first-table mx-3">
                   <tr>
