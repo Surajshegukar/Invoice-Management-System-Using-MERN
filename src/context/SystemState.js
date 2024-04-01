@@ -6,6 +6,8 @@ function SystemState(props) {
     const [productList,setProductList] = useState([]);
     const [customerList,setCustomerList] = useState([]);
     const [invoiceList,setInvoiceList] = useState([]);
+    const local_url = "http://localhost:5000";
+    const global_url = "https://invoice-management-system-using-mern-wwo7.vercel.app";
 
     const fetchProduct = async() => {
         const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/product/fetchallproduct',{

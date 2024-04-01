@@ -78,7 +78,7 @@ function ShowInvoice() {
 
   useEffect(() => {
     fetchInvoice();
-  }, []);
+  }, [deleteInvoice,editInvoice]);
   return (
     <>
       <div className="container my-3">
