@@ -18,10 +18,11 @@ const Invoice = () => {
     e.preventDefault();
 
     
-    if(customerInfo.customerName === "" || customerInfo.customerEmail === "" || customerInfo.mobileNumber === "" || customerInfo.address === "" || items.length === 0){
+    if(customerInfo.customerName === "" || customerInfo.mobileNumber === "" || customerInfo.address === "" || items.length === 0){
       alert("Please fill all the fields")
       setError(true)
     }
+    
     if(products.product === "") {
       alert("Please enter a valid product name")
       setError(true)
@@ -47,7 +48,7 @@ const Invoice = () => {
         date: new Date().toGMTString().substring(5,16),
       });
       setProducts([
-        { product: "", quantity: '', price: '' },
+        { product: "", quantity: 0, price: 0 },
       ])
       
     }
@@ -60,14 +61,14 @@ const Invoice = () => {
   const [customerInfo, setCustomerInfo] = useState({
     invoiceNo:randomNumber ,
     customerName: "",
-    customerEmail: "",
+    customerEmail: "Yourgmail@gmail.com",
     mobileNumber: "",
     address: "",
     date: new Date().toGMTString().substring(5,16),
   });
 
   const [products, setProducts] = useState([
-    { product: "", quantity: '', price: '' },
+    { product: "", quantity: 0, price: 0 },
   ]);
 
   const handleCustomerInfoChange = (e) => {
@@ -123,10 +124,10 @@ const Invoice = () => {
           name="customerEmail"
           id="floatingInput"
           value={customerInfo.customerEmail}
-          onChange={handleCustomerInfoChange}
+          // onChange={handleCustomerInfoChange}
           className="form-control"
           placeholder="Customer Email"
-          required
+          
         />
         <label htmlFor="floatingInput">Customer Email</label>
       </div>
@@ -138,7 +139,7 @@ const Invoice = () => {
           onChange={handleCustomerInfoChange}
           className="form-control"
           id="floatingInput"
-          placeholder="Customer Name"
+          placeholder="Customer mobile number"
           required
         />
         <label htmlFor="floatingInput">Customer Mobile Number</label>
@@ -151,7 +152,7 @@ const Invoice = () => {
           onChange={handleCustomerInfoChange}
           className="form-control"
           id="floatingInput"
-          placeholder="Customer Name"
+          placeholder="Customer address"
           required
         />
         <label htmlFor="floatingInput">Customer Address</label>

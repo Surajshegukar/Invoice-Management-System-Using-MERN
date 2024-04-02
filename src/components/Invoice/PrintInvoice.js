@@ -23,7 +23,7 @@ function PrintInvoice(props) {
   }, [number]);
 
   const numberToWordsConverter = (num) => {
-    return numberToWords.toWords(num).toUpperCase();
+    return numberToWords.toWords(num).toUpperCase()+" ONLY";
   };
   
   const pdfref = useRef(null)
@@ -37,18 +37,18 @@ function PrintInvoice(props) {
       <div className="container border border-1 printInvoiceContainer">
         <div id="Invoice">
         <PDFExport ref={pdfref} fileName="invoice" paperSize="A2">
-          <div style={{ width: "100%", height: "100%",padding:"20px" }}>
+          <div style={{ width: "100%", height: "100%",padding:"20px",fontSize:"20px" }}>
             <div className="header">
               <div className="companyName" id="companyName">
                 Vinu Enterprises
              </div>
               <div className="phoneNum" id="phoneNum">
-                Phone No. 9764560267
+                Phone Number: 9764560267
               </div>
               <div className="email" id="email">
                 Email: more.santosh17@gmail.com
               </div>
-              <img
+              {/* <img
                 style={{
                   position: "relative",
                   top: "0",
@@ -58,7 +58,7 @@ function PrintInvoice(props) {
                 }}
                 src = {myImage}
                 alt="Icon"
-              />
+              /> */}
             </div>
             <br />
             <h1>Tax Invoice</h1>
@@ -68,18 +68,19 @@ function PrintInvoice(props) {
                 {address}
               </span>
               <span className="invoiceNo" id="invoiceNo">
-                Invoice No.: {invoiceNo}
+                Invoice Number: {invoiceNo}
               </span>
             </div>
             <br />
             <div className="floatText2">
-              <span className="customer-phone" id="customer-phone">
-                Phone No. {customerMobileNo}
+              <span className="companyAddress" id="customer-email">
+                {/* Customer Email: {customerEmail} */}
               </span>
               <br />
-              <span className="companyAddress" id="customer-email">
-                Customer Email: {customerEmail}
+              <span className="customer-phone" id="customer-phone">
+                Phone Number: {customerMobileNo}
               </span>
+              
               <span className="date" id="date">
                 Date: {date}
               </span>
@@ -133,9 +134,9 @@ function PrintInvoice(props) {
                 </tr>
               </tfoot>
             </table>
-            <div className="table-wrapper mx-7">
+            <div className="table-wrapper">
               <div className="custom-table-container">
-                <table className="custom-first-table mx-3">
+                <table className="custom-first-table ms-4">
                   <tr>
                     <td className="upperCase1">INVOICE AMOUNT IN WORDS</td>
                   </tr>
@@ -152,7 +153,7 @@ function PrintInvoice(props) {
                   </tr>
                 </table>
 
-                <table className="custom-second-table mx-3">
+                <table className="custom-second-table me-4">
                   <tr>
                     <td>Sub Total</td>
                     <td
@@ -164,7 +165,7 @@ function PrintInvoice(props) {
                     </td>
                   </tr>
                   <tr>
-                    <td>Tax (CGST+SGST) </td>
+                    <td>Tax </td>
                     <td
                       className="rightAlign"
                       id="tax"
