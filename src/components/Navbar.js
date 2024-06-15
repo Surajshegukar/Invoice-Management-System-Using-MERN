@@ -24,6 +24,8 @@ function Navbar() {
             <div><Link className="dropdown-item" to="/manage/showinvoice">Show Invoice</Link></div>
           </div>
         </div>
+          <div><Link to = "/login" className="nav-link">Login</Link></div>
+          <div><Link to = "/register" className="nav-link" >Register</Link></div>
         
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import CustomerItem from "./CustomerItem";
 import systemContext from "../../context/systemContext";
 
+
 function Customer() {
   const context = useContext(systemContext);
   const {fetchCustomer,customerList,addCustomer,deleteCustomer} = context;
@@ -76,7 +77,7 @@ function Customer() {
           Add Customer
         </button>
       </div>
-      <div className="container mb-3 border my-3">
+      <div className="container mb-3 my-3">
       <table className="table table-striped table-hover">
           <thead className="table-primary">
             <tr>

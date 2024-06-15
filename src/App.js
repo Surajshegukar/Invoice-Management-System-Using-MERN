@@ -14,6 +14,8 @@ import {
   Routes,
   Link
   } from "react-router-dom"
+import Login from './components/Login';
+import Register from './components/Register';
 
 
 
@@ -30,6 +32,8 @@ function App() {
               <Route path='/manage/customer' element={<Customer/>}/>
               <Route path='/manage/product' element={<Product/>}/>
               <Route path = "/about" element = {<About/>} />
+              <Route path = "/login" element = {<Login/>} />
+              <Route path = "/register" element = {<Register/>} />
               
           </Routes>
         

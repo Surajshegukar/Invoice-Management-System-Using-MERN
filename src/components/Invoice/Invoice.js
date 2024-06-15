@@ -61,11 +61,12 @@ const Invoice = () => {
   const [customerInfo, setCustomerInfo] = useState({
     invoiceNo:randomNumber ,
     customerName: "",
-    customerEmail: "Yourgmail@gmail.com",
+    customerEmail: "",
     mobileNumber: "",
     address: "",
     date: new Date().toGMTString().substring(5,16),
   });
+  console.log(productList);
 
   const [products, setProducts] = useState([
     { product: "", quantity: 0, price: 0 },
@@ -124,7 +125,7 @@ const Invoice = () => {
           name="customerEmail"
           id="floatingInput"
           value={customerInfo.customerEmail}
-          // onChange={handleCustomerInfoChange}
+          onChange={handleCustomerInfoChange}
           className="form-control"
           placeholder="Customer Email"
           
@@ -172,16 +173,8 @@ const Invoice = () => {
                 id="floatingInput"
                 placeholder="Product Name"
                 required
-                list="options"
               />
-              <datalist id="options">
-                {productList.map((product,index)=>{
-                  return(
-                    <option key={index} value={product.productName} />
-                  )
-                }
-                )}
-              </datalist>
+              
               
               <label htmlFor="floatingInput">Product Name</label>
             </div>
@@ -213,7 +206,7 @@ const Invoice = () => {
             </div>
 
             <button
-              className="bg-danger w-10 "
+              className="btn btn-danger w-10 h-100 mt-2"
               type="button"
               onClick={() => handleRemoveProduct(index)}
             >

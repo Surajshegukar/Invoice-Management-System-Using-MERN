@@ -239,13 +239,37 @@ function SystemState(props) {
     }
     setProductList(editedInvoice);
   };
+
+  const register = async (name, email, password) => {
+    const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+    const json = await response.json();
+    console.log(json);
+  };
   
+  const login = async (email, password) => {
+    const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    const json = await response.json();
+    console.log(json);
+  };
   return (
     <systemContext.Provider value={{productList,customerList,invoiceList,
     fetchInvoice,fetchProduct,fetchCustomer,
     addProduct,addInvoice,addCustomer,
     editProduct,editCustomer,editInvoice,
-    deleteCustomer,deleteInvoice,deleteProduct}}>
+    deleteCustomer,deleteInvoice,deleteProduct,
+    login,register}}>
 
         {props.children}
     </systemContext.Provider>

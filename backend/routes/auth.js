@@ -8,7 +8,7 @@ const JWT_Secret = "ThisSecure";
 var fetchuser = require('../middleware/fetchuser');
 
 //create user
-router.post('/',[
+router.post('/register',[
     body('name',"Enter the vaild name").isLength({min:3}),
     body('email',"Enter the vaild email").isEmail(),
     body('password',"Enter the vaild password").isLength({min:5})
@@ -91,5 +91,14 @@ try{
   res.status(500).send("Internal Server Error");
 }
 });
-
+router.get('/getAlluser', async (req,res)=>{
+  try{
+    const user = await User.find();
+    res.send(user);
+  
+  }catch(error){
+    console.log(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+  });
 module.exports = router;
