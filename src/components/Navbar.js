@@ -12,16 +12,16 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-primary">
   <div className="container-fluid">
-    <Link className="navbar-brand" to="/"><strong>Invoice</strong></Link>
+    <Link className="navbar-brand my-auto" to="/"><strong>Invoice</strong></Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div className="navbar-nav">
-        <Link to = "/" className="nav-link active" aria-current="page" >Home</Link>
-        <Link to = "/about" className="nav-link" >About</Link>
+        <Link to = "/" className="nav-link active my-auto" aria-current="page" >Home</Link>
+        <Link to = "/about" className="nav-link my-auto" >About</Link>
         <div className="nav-item dropdown">
-          <Link className="nav-link dropdown-toggle" to="/manage" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <Link className="nav-link dropdown-toggle my-1" to="/manage" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Manage
           </Link>
           <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -32,10 +32,10 @@ function Navbar() {
           </div>
         </div>
         { !localStorage.getItem('token') ?<>
-          <div><Link to = "/login" className="nav-link">Login</Link></div>
-          <div><Link to = "/register" className="nav-link" >Register</Link></div>
+          <div><Link to = "/login" className="nav-link bg-light mx-2 p-2 my-1" style={{borderRadius:"5px"}} >Login</Link></div>
+          <div><Link to = "/register" className="nav-link bg-light mx-2 p-2 my-1" style={{borderRadius:"5px"}} >Register</Link></div>
           </>
-          :<div className="nav-link cursor-pointer" onClick={handleLogOut} >Logout</div>
+          :<div className="my-auto mx-2 bg-danger p-1" style={{cursor: "pointer",borderRadius:"5px"}} onClick={handleLogOut} >Logout</div>
         }
       </div>
     </div>
