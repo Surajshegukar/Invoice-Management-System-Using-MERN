@@ -2,12 +2,14 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import systemContext from "../../context/systemContext";
 import PrintInvoice from "./PrintInvoice";
 import editInvoice from "./editInvoice";
+import { useNavigate } from "react-router-dom";
 
 function ShowInvoice() {
   const context = useContext(systemContext);
   const modalContentRef = useRef(null);
   const updateContentRef = useRef(null);
   const { invoiceList, editInvoice, fetchInvoice, deleteInvoice } = context;
+  const navigate = useNavigate();
   
   const [eInvoice, setEInvoice] = useState({
     eInvoiceNumber: 0,
@@ -77,6 +79,11 @@ function ShowInvoice() {
   };
 
   useEffect(() => {
+    if(!localStorage.getItem('token')){
+      alert("Please Login First");
+      navigate('/login', { replace: true });
+    }
+
     fetchInvoice();
   }, [deleteInvoice,editInvoice]);
   return (

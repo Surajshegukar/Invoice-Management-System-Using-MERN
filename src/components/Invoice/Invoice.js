@@ -1,6 +1,7 @@
-import React, { useState, useRef, useContext} from "react";
+import React, { useState, useRef, useContext, useEffect} from "react";
 import systemContext from "../../context/systemContext";
 import PrintInvoice from "./PrintInvoice";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -8,8 +9,15 @@ const Invoice = () => {
   const context = useContext(systemContext)
   const {addInvoice,productList} = context;
   const modalContentRef = useRef(null);
+  const navigate = useNavigate();
   
-  
+  useEffect(()=>{
+    if(!localStorage.getItem('token')){
+      alert("Please Login First");
+      navigate('/login', { replace: true });
+    }
+  },[]);
+
   const [items,setItems] = useState([])
 
   const [error, setError] = useState(false);

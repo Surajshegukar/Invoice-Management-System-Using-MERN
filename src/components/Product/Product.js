@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import ShowProduct from "./ShowProduct";
 import systemContext from "../../context/systemContext";
+import { useNavigate } from "react-router-dom";
 
 function Product() {
   const context = useContext(systemContext);
   const { productList, fetchProduct, addProduct } = context;
-
+  const navigate = useNavigate();
   const [product, setProduct] = useState({ productName: " ", productPrice: 0 });
 
   const handleClick = (e) => {
@@ -17,6 +18,11 @@ function Product() {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      alert("Please Login First");
+      navigate("/login", { replace: true });
+    }
+
     fetchProduct();
     
   }, []);

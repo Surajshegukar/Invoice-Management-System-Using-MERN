@@ -10,11 +10,11 @@ function SystemState(props) {
     const global_url = "https://invoice-management-system-using-mern-wwo7.vercel.app";
 
     const fetchProduct = async() => {
-        const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/product/fetchallproduct',{
+        const response = await fetch('http://localhost:5000/api/product/fetchallproduct',{
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+            "auth-token": localStorage.getItem('token')
         },
     });
     const json = await response.json();
@@ -22,11 +22,11 @@ function SystemState(props) {
     setProductList(json);
     }
     const fetchInvoice = async() => {
-        const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/invoice/fetchallinvoice',{
+        const response = await fetch('http://localhost:5000/api/invoice/fetchallinvoice',{
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+            "auth-token": localStorage.getItem('token')
         },
     });
     const json = await response.json();
@@ -35,11 +35,11 @@ function SystemState(props) {
     }
 
     const fetchCustomer = async() => {
-        const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/customer/fetchallcustomer',{
+        const response = await fetch('http://localhost:5000/api/customer/fetchallcustomer',{
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+            "auth-token": localStorage.getItem('token')
         },
     });
     const json = await response.json();
@@ -48,11 +48,11 @@ function SystemState(props) {
     
     }
     const addProduct= async(productName,productPrice)=>{
-        const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/product/addproduct',{
+        const response = await fetch('http://localhost:5000/api/product/addproduct',{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+                "auth-token": localStorage.getItem('token')
             },
             body: JSON.stringify({productName,productPrice})
         });
@@ -61,11 +61,11 @@ function SystemState(props) {
         
     };
     const addCustomer= async(customerName,customerEmail,customerMobileNo,customerAddress)=>{
-      const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/customer/addcustomer',{
+      const response = await fetch('http://localhost:5000/api/customer/addcustomer',{
           method:"POST",
           headers:{
               "Content-Type":"application/json",
-              "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+              "auth-token": localStorage.getItem('token')
           },
           body: JSON.stringify({customerName,customerEmail,customerMobileNo,customerAddress})
       });
@@ -83,11 +83,11 @@ function SystemState(props) {
       items,
       totalAmount,
       date)=>{
-      const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/invoice/addinvoice',{
+      const response = await fetch('http://localhost:5000/api/invoice/addinvoice',{
           method:"POST",
           headers:{
               "Content-Type":"application/json",
-              "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+              "auth-token": localStorage.getItem('token')
           },
           body: JSON.stringify({invoiceNumber,
             customerName,
@@ -105,11 +105,11 @@ function SystemState(props) {
   };
 
     const deleteProduct=async(id)=>{
-      const response = await fetch(`https://invoice-management-system-using-mern-wwo7.vercel.app/api/product/deleteproduct/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/product/deleteproduct/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+          "auth-token": localStorage.getItem('token')
         },
       });
       const json = response.json();
@@ -122,11 +122,11 @@ function SystemState(props) {
       setProductList(newProduct);
     }
     const deleteCustomer=async(id)=>{
-      const response = await fetch(`https://invoice-management-system-using-mern-wwo7.vercel.app/api/customer/deletecustomer/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/customer/deletecustomer/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+          "auth-token": localStorage.getItem('token')
         },
       });
       const json = response.json();
@@ -139,11 +139,11 @@ function SystemState(props) {
       setCustomerList(newCustomer);
     }
     const deleteInvoice=async(id)=>{
-      const response = await fetch(`https://invoice-management-system-using-mern-wwo7.vercel.app/api/invoice/deleteinvoice/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/invoice/deleteinvoice/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+          "auth-token": localStorage.getItem('token')
         },
       });
       const json = response.json();
@@ -158,11 +158,11 @@ function SystemState(props) {
     }
 
     const editProduct = async (id,productName,productPrice) => {
-    const response = await fetch(`https://invoice-management-system-using-mern-wwo7.vercel.app/api/product/updateproduct/${id}`, {
+    const response = await fetch(`http://localhost:5000/api/product/updateproduct/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+        "auth-token": localStorage.getItem('token')
       },
       body: JSON.stringify({productName,productPrice}),
     });
@@ -179,11 +179,11 @@ function SystemState(props) {
     setProductList(editedProduct);
   };
   const editCustomer = async (id,customerName,customerEmail,customerMobileNo,customerAddress) => {
-    const response = await fetch(`https://invoice-management-system-using-mern-wwo7.vercel.app/api/customer/updatecustomer/${id}`, {
+    const response = await fetch(`http://localhost:5000/api/customer/updatecustomer/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+        "auth-token": localStorage.getItem('token')
       },
       body: JSON.stringify({customerName,customerEmail,customerMobileNo,customerAddress}),
     });
@@ -209,11 +209,11 @@ function SystemState(props) {
     customerMobileNo,
     customerAddress,
     items) => {
-    const response = await fetch(`https://invoice-management-system-using-mern-wwo7.vercel.app/api/invoice/updateinvoice/${id}`, {
+    const response = await fetch(`http://localhost:5000/api/invoice/updateinvoice/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkZjIyNmRkMzNmYWY2Y2E5MWNmMDkzIn0sImlhdCI6MTcwOTEyMjE1N30.aeujtbLlOLn_cemJ9oZ9e2n-ddQ4zmFSmlsEewfVEZs"
+        "auth-token": localStorage.getItem('token')
       },
       body: JSON.stringify({invoiceNumber,
         customerName,
@@ -240,36 +240,15 @@ function SystemState(props) {
     setProductList(editedInvoice);
   };
 
-  const register = async (name, email, password) => {
-    const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, email, password }),
-    });
-    const json = await response.json();
-    console.log(json);
-  };
   
-  const login = async (email, password) => {
-    const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    const json = await response.json();
-    console.log(json);
-  };
+  
   return (
     <systemContext.Provider value={{productList,customerList,invoiceList,
     fetchInvoice,fetchProduct,fetchCustomer,
     addProduct,addInvoice,addCustomer,
     editProduct,editCustomer,editInvoice,
     deleteCustomer,deleteInvoice,deleteProduct,
-    login,register}}>
+    }}>
 
         {props.children}
     </systemContext.Provider>

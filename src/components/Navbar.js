@@ -1,7 +1,14 @@
 import React from 'react'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 function Navbar() {
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    localStorage.removeItem('token');
+    alert("Logged Out Successfully");
+    navigate('/');
+
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-primary">
   <div className="container-fluid">
@@ -24,9 +31,12 @@ function Navbar() {
             <div><Link className="dropdown-item" to="/manage/showinvoice">Show Invoice</Link></div>
           </div>
         </div>
+        { !localStorage.getItem('token') ?<>
           <div><Link to = "/login" className="nav-link">Login</Link></div>
           <div><Link to = "/register" className="nav-link" >Register</Link></div>
-        
+          </>
+          :<div className="nav-link cursor-pointer" onClick={handleLogOut} >Logout</div>
+        }
       </div>
     </div>
   </div>

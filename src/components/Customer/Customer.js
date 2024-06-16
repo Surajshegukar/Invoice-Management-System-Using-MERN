@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import CustomerItem from "./CustomerItem";
 import systemContext from "../../context/systemContext";
+import { useNavigate } from "react-router-dom";
 
 
 function Customer() {
   const context = useContext(systemContext);
   const {fetchCustomer,customerList,addCustomer,deleteCustomer} = context;
   const [customer, setCustomer] = useState({ customerName: " ", customerEmail: '',customerMobileNo:0,customerAddress:'' });
- 
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setCustomer({ ...customer, [e.target.name]: e.target.value });
@@ -18,6 +19,10 @@ function Customer() {
     console.log(customer);
   };
   useEffect(()=>{
+    if(!localStorage.getItem('token')){
+      alert("Please Login First");
+      navigate('/login', { replace: true });
+    }
     fetchCustomer();
   },[]);
 
