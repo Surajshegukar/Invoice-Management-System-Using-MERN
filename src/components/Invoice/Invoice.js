@@ -4,19 +4,29 @@ import PrintInvoice from "./PrintInvoice";
 import { useNavigate } from "react-router-dom";
 
 
-
 const Invoice = () => {
   const context = useContext(systemContext)
-  const {addInvoice,productList} = context;
+  const {addInvoice,fetchProduct,productList} = context;
   const modalContentRef = useRef(null);
   const navigate = useNavigate();
+  const [productOption,setProductOption] = useState([]);
+  
+  
   
   useEffect(()=>{
+    
     if(!localStorage.getItem('token')){
       alert("Please Login First");
       navigate('/login', { replace: true });
     }
+
   },[]);
+
+  useEffect(()=>{
+    fetchProduct();
+    console.log("UseEffect")
+    console.log(productList);
+  },[])
 
   const [items,setItems] = useState([])
 
@@ -86,7 +96,21 @@ const Invoice = () => {
   };
 
   const handleProductChange = (index, e) => {
+    
     const { name, value } = e.target;
+
+    if(name === "product"){
+      productList.find((product)=>{
+        if(product.productName === value){
+          setProductOption([{
+            productName: product.productName,
+            productPrice: product.productPrice
+          }]);}
+      });
+      
+    }
+    
+    console.log(productOption);
     setProducts((prevProducts) =>
       prevProducts.map((product, i) =>
         i === index ? { ...product, [name]: value } : product
@@ -172,7 +196,7 @@ const Invoice = () => {
         {products.map((product, index) => (
           <div className="d-flex row gap-3 mt-4" key={index}>
             <div className="form-floating">
-              <input
+              <select
                 type="text"
                 name="product"
                 value={product.product}
@@ -181,7 +205,12 @@ const Invoice = () => {
                 id="floatingInput"
                 placeholder="Product Name"
                 required
-              />
+              >
+                <option value = "0">Select Product</option>
+                {productList.map((product,index)=>{
+                  return <option key={index} value={product.productName}>{product.productName}</option>
+                })}
+              </select>
               
               
               <label htmlFor="floatingInput" className="mx-2">Product Name</label>
@@ -200,17 +229,20 @@ const Invoice = () => {
               <label htmlFor="floatingInput" className="mx-2">Quantity</label>
             </div>
             <div className="form-floating">
-              <input
-                type="number"
+              <select
                 name="price"
                 value={product.price}
                 onChange={(e) => handleProductChange(index, e)}
-                required
                 className="form-control"
                 id="floatingInput"
-                placeholder="Product Price"
-              />
-              <label htmlFor="floatingInput"className="mx-2">Price</label>
+                required
+                >
+                  <option value = "0">Select Price</option>
+                  {productOption.map((product,index)=>{
+                    return <option key={index} value={product.productPrice}>{product.productPrice}</option>
+                  })}
+                </select>
+              <label htmlFor="floatingInput" className="mx-2">Price</label>
             </div>
 
             <button
