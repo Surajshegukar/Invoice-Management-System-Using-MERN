@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
+
 function Login() {
   const [user, setUser] = useState({email: '', password: ''});
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ function Login() {
     setUser({...user, [e.target.id]: e.target.value});
 
   }
+  
   const redirect = () => {
     navigate('/manage/invoice');
   };
@@ -45,22 +47,22 @@ function Login() {
   }
 
   return (
-    <div className='container border w-50 mt-5 p-5'>
+    <form className='container border mt-5 p-5' style={{maxWidth:"500px"}}>
   <div className="row mb-3">
-    <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
-    <div className="col-sm-10">
-      <input type="email"  onChange={handleOnChange} className="form-control w-50" id="email"/>
+    <label htmlFor="email" className="col-sm-2 col-form-label " style={{marginRight:"10px"}}>Email</label>
+    <div className="col-sm-12">
+      <input type="email"  onChange={handleOnChange} className="form-control"  id="email"/>
     </div>
   </div>
   <div className="row mb-3">
-    <label htmlFor="password" className="col-sm-2 col-form-label">Password</label>
-    <div className="col-sm-10">
-      <input type="password" onChange={handleOnChange}  className="form-control w-50" id="password"/>
+    <label htmlFor="password" className="col-sm-2 col-form-label" style={{marginRight:"10px"}}>Password</label>
+    <div className="col-sm-12">
+      <input type="password" onChange={handleOnChange}  className="form-control"  id="password"/>
     </div>
   </div>
   
   <button onClick={handleOnClick} className="btn btn-primary">Log in</button>
-</div>
+</form>
   )
 }
 

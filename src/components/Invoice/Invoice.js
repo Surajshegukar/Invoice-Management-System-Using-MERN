@@ -113,7 +113,7 @@ const Invoice = () => {
   }
 
   return (
-    <div className="container w-50  my-4">
+    <form className="container my-4" style={{maxWidth:"500px"}}>
       <div className="form-floating mb-3 w-30">
         <input
           type="text"
@@ -170,8 +170,8 @@ const Invoice = () => {
       <div>
         <h3>Products</h3>
         {products.map((product, index) => (
-          <div className="d-flex gap-3" key={index}>
-            <div className="form-floating mb-3 w-25">
+          <div className="d-flex row gap-3 mt-4" key={index}>
+            <div className="form-floating">
               <input
                 type="text"
                 name="product"
@@ -184,9 +184,9 @@ const Invoice = () => {
               />
               
               
-              <label htmlFor="floatingInput">Product Name</label>
+              <label htmlFor="floatingInput" className="mx-2">Product Name</label>
             </div>
-            <div className="form-floating mb-3 w-25">
+            <div className="form-floating ">
               <input
                 type="number"
                 name="quantity"
@@ -197,9 +197,9 @@ const Invoice = () => {
                 placeholder="Product Quantity"
                 required
               />
-              <label htmlFor="floatingInput">Quantity</label>
+              <label htmlFor="floatingInput" className="mx-2">Quantity</label>
             </div>
-            <div className="form-floating mb-3 w-25">
+            <div className="form-floating">
               <input
                 type="number"
                 name="price"
@@ -210,16 +210,18 @@ const Invoice = () => {
                 id="floatingInput"
                 placeholder="Product Price"
               />
-              <label htmlFor="floatingInput">Price</label>
+              <label htmlFor="floatingInput"className="mx-2">Price</label>
             </div>
 
             <button
-              className="btn btn-danger w-10 h-100 mt-2"
+              className="btn btn-danger mx-3"
+              style={{maxWidth:"50px",Height:"70px"}}
               type="button"
               onClick={() => handleRemoveProduct(index)}
             >
               <i className="fa-solid fa-trash"></i>
             </button>
+            
           </div>
         ))}
         <button type="button" className="btn btn-primary me-3 my-5 mb-3" onClick={handleAddProduct}>
@@ -287,7 +289,7 @@ const Invoice = () => {
         </div>
       </div>
 
-    </div>
+    </form>
   );
 };
 

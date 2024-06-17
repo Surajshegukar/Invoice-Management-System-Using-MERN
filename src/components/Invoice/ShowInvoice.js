@@ -88,7 +88,7 @@ function ShowInvoice() {
   }, [deleteInvoice,editInvoice]);
   return (
     <>
-      <div className="container my-3">
+      <div className="container my-3" style={{overflowX:"scroll"}}>
         Show Invoice
         <table className="table table-striped table-hover my-5">
           <thead className="table-primary ">
@@ -329,7 +329,7 @@ function ShowInvoice() {
                     </div>
           <button
             type="button"
-            className="btn btn-primary me-3"
+            className="btn btn-primary me-3 my-1"
             data-bs-toggle="modal"
             data-bs-target={`#exampleModal${index}`}
           >
@@ -337,7 +337,7 @@ function ShowInvoice() {
           </button>
           <button
             type="button"
-            className="btn btn-primary me-3"
+            className="btn btn-primary me-3 my-1"
             data-bs-toggle="modal"
             data-bs-target={`#uexampleModal${index}`}
             onClick={() => updateInvoice(invoice)}
@@ -346,7 +346,7 @@ function ShowInvoice() {
           </button>
           <button
             onClick={() => deleteInvoice(invoice._id)}
-            className="btn btn-danger"
+            className="btn btn-danger my-1"
           >
             Delete
           </button>

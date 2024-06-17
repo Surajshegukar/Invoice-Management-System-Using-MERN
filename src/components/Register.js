@@ -40,24 +40,24 @@ function Register() {
   }
 
   return (
-    <div className="row g-3 container border mt-5 w-25 p-5 m-auto">
-  <div className="col-md-6">
+    <form className="container border mt-5 p-5" style={{marginTop:"60px",maxWidth:"600px"}}>
+  <div className="col-md-12 ">
     <label for="email" className="form-label">Email</label>
     <input type="email" onChange={handleOnChange} className="form-control" id="email"/>
   </div>
-  <div className="col-md-6">
+  <div className="col-md-12 mt-3">
     <label for="name" className="form-label">Username</label>
     <input type="text" onChange={handleOnChange} className="form-control" id="name"/>
   </div>
-  <div className="col-md-6">
+  <div className="col-md-12 mt-3">
     <label for="password" className="form-label">Password</label>
     <input type="password" onChange={handleOnChange} className="form-control" id="password"/>
   </div>
   
-  <div className="col-12">
+  <div className="col-12 mt-3">
     <button onClick={handleOnClick}  className="btn btn-primary">Register</button>
   </div>
-</div>
+</form>
   )
 }
 

@@ -35,7 +35,7 @@ function Navbar() {
           <div><Link to = "/login" className="nav-link bg-light mx-2 p-2 my-1" style={{borderRadius:"5px"}} >Login</Link></div>
           <div><Link to = "/register" className="nav-link bg-light mx-2 p-2 my-1" style={{borderRadius:"5px"}} >Register</Link></div>
           </>
-          :<div className="my-auto mx-2 bg-danger p-1" style={{cursor: "pointer",borderRadius:"5px"}} onClick={handleLogOut} >Logout</div>
+          :<div><button className="my-2 bg-danger p-1" style={{cursor: "pointer",borderRadius:"5px"}} onClick={handleLogOut} >Logout</button></div>
         }
       </div>
     </div>

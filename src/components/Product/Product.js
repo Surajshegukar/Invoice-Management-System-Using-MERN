@@ -28,7 +28,7 @@ function Product() {
   }, []);
   return (
     <>
-      <div className="container w-50  my-4">
+      <form className="container my-4" style={{maxWidth:"500px"}}>
         <h3>Add Product</h3>
         <div className="form-floating mb-3 w-30">
           <input
@@ -59,8 +59,8 @@ function Product() {
         >
           Add Product
         </button>
-      </div>
-      <div className="container">
+      </form>
+      <div className="container" style={{overflowX:"scroll"}}>
         <table className="table table-striped table-hover">
           <thead className="table-primary">
             <tr>
