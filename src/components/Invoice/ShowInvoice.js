@@ -8,9 +8,14 @@ function ShowInvoice() {
   const context = useContext(systemContext);
   const modalContentRef = useRef(null);
   const updateContentRef = useRef(null);
-  const { invoiceList, editInvoice, fetchInvoice, deleteInvoice } = context;
+  const { invoiceList, editInvoice, fetchInvoice, deleteInvoice,getUser } = context;
   const navigate = useNavigate();
-  
+  const [user,setUser] = useState({});
+
+  const getUserDetails=async()=>{
+    const userDetails = await getUser();
+    setUser(userDetails);
+  };
   const [eInvoice, setEInvoice] = useState({
     eInvoiceNumber: 0,
     eCustomerName: " ",
@@ -82,8 +87,8 @@ function ShowInvoice() {
     if(!localStorage.getItem('token')){
       alert("Please Login First");
       navigate('/login', { replace: true });
-    }
-
+    };
+    getUserDetails();
     fetchInvoice();
   }, [deleteInvoice,editInvoice]);
   return (
@@ -142,6 +147,7 @@ function ShowInvoice() {
                               products={invoice.items}
                               date={invoice.date.substring(0, 10)}
                               modalContentRef={modalContentRef}
+                              user = {user}
                             />
                           </div>
                           <div className="modal-footer">
@@ -249,8 +255,8 @@ function ShowInvoice() {
                                 />
                               </div>
                               {eInvoice.eItems.map((product, index) => (
-                                <div className="d-flex gap-3" key={index}>
-                                  <div className="form-floating mb-3 w-25">
+                                <div className="d-flex flex-wrap gap-3 my-3" key={index}>
+                                  <div className="form-floating">
                                     <input
                                       type="text"
                                       name="eProduct"
@@ -265,7 +271,7 @@ function ShowInvoice() {
 
                                     <label htmlFor="floatingInput">Product Name</label>
                                   </div>
-                                  <div className="form-floating mb-3 w-25">
+                                  <div className="form-floating">
                                     <input
                                       type="number"
                                       name="eQuantity"
@@ -278,7 +284,7 @@ function ShowInvoice() {
                                     />
                                     <label htmlFor="floatingInput">Quantity</label>
                                   </div>
-                                  <div className="form-floating mb-3 w-25">
+                                  <div className="form-floating">
                                     <input
                                       type="number"
                                       name="ePrice"
@@ -293,13 +299,16 @@ function ShowInvoice() {
                                   </div>
 
                                   <button
-                                    className="bg-danger w-10 "
+                                    className="bg-danger"
+                                    style={{color:"white",height:"50px",marginTop:"4px",border:"1px solid white",borderRadius:"10px"}}
                                     type="button"
                                     onClick={() => handleRemoveItem(index)}
                                   >
                                     <i className="fa-solid fa-trash"></i>
                                   </button>
+                                  
                                 </div>
+                                
                               ))}
                               <button type="button" className="btn btn-primary me-3 my-5 mb-3" onClick={handleAddItem}>
                                 <i className="fa-solid fa-plus"></i> Add Product

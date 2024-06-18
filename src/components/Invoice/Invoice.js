@@ -6,12 +6,16 @@ import { useNavigate } from "react-router-dom";
 
 const Invoice = () => {
   const context = useContext(systemContext)
-  const {addInvoice,fetchProduct,productList} = context;
+  const {addInvoice,fetchProduct,productList,getUser} = context;
   const modalContentRef = useRef(null);
   const navigate = useNavigate();
   const [productOption,setProductOption] = useState([]);
-  
-  
+  const [user,setUser] = useState({});
+
+  const getUserDetails = async()=>{
+    const userObject = await getUser();
+    setUser(userObject);
+  }
   
   useEffect(()=>{
     
@@ -19,14 +23,12 @@ const Invoice = () => {
       alert("Please Login First");
       navigate('/login', { replace: true });
     }
-
+    fetchProduct();
+    getUserDetails();
+    
   },[]);
 
-  useEffect(()=>{
-    fetchProduct();
-    console.log("UseEffect")
-    console.log(productList);
-  },[])
+  
 
   const [items,setItems] = useState([])
 
@@ -305,6 +307,7 @@ const Invoice = () => {
                 products={products}
                 cretedAt = {customerInfo.date}
                 modalContentRef={modalContentRef}
+                user = {user}
                 
               />
             </div>

@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function Home() {
   
 const styles = {
   footerContainer: {
-    background: 'linear-gradient(to right,#3498db,red)', // Gradient background
+    background: 'linear-gradient(to right,#3498db,lightgreen)', // Gradient background
     color: 'black',
     padding: '30px 0',
   },
@@ -128,8 +129,8 @@ const styles = {
       <div style={styles.footerContent}>
         <div style={styles.footerColumn}>
           <h3>Contact Us</h3>
-          <p>Email: info@example.com</p>
-          <p>Phone: +1 123 456 7890</p>
+          <p>Email: surajshegukar2732@gmail.com</p>
+          <p>Phone: +919021434751</p>
         </div>
         <div style={styles.footerColumn}>
           <h3>Quick Links</h3>
@@ -143,10 +144,10 @@ const styles = {
         <div style={styles.footerColumn}>
           <h3>Follow Us</h3>
           <div style={styles.socialIcons}>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+            <Link href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></Link>
+            <Link href="https://twitter.com/" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></Link>
+            <Link href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></Link>
+            <Link href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></Link>
           </div>
         </div>
       </div>

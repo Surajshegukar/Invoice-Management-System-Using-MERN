@@ -6,7 +6,7 @@ import numberToWords from 'number-to-words';
 import myImage from './icon2.jpg';
 
 function PrintInvoice(props) {
-  const {invoiceNo,customerName,customerEmail,customerMobileNo,address,products,date,modalContentRef } = props;
+  const {invoiceNo,customerName,customerEmail,customerMobileNo,address,products,date,modalContentRef,user } = props;
   
   let total = 0;
   products.forEach((product) => {
@@ -33,20 +33,20 @@ function PrintInvoice(props) {
   }
   return (
     <>  
-    <div ref={modalContentRef}>
+    <div ref={modalContentRef} style={{overflowX:"scroll"}}>
       <div className="container border border-1 printInvoiceContainer">
         <div id="Invoice">
         <PDFExport ref={pdfref} fileName="invoice" paperSize="A2">
           <div style={{ width: "100%", height: "100%",padding:"20px",fontSize:"20px" }}>
             <div className="header">
               <div className="companyName" id="companyName">
-                Vinu Enterprises
+                {user.name}
              </div>
               <div className="phoneNum" id="phoneNum">
                 Phone Number: 9764560267
               </div>
               <div className="email" id="email">
-                Email: more.santosh17@gmail.com
+                Email: {user.email}
               </div>
               {/* <img
                 style={{
@@ -205,7 +205,7 @@ function PrintInvoice(props) {
             </div>
             <p className="signatureSpace1" id="signatureSpace1">
               {" "}
-              For Vinu Enterprises
+              For {user.name}
             </p>
             <p className="signatureSpace2"> Authorized Signatory</p>
           </div>
