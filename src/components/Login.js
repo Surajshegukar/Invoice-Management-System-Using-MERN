@@ -19,7 +19,7 @@ function Login() {
     console.log(user);
     e.preventDefault();
     const {email, password} = user;
-    const response = await fetch('http://localhost:5000/api/auth/login', {
+    const response = await fetch('https://invoice-management-system-using-mern-wwo7.vercel.app/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
