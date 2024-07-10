@@ -62,7 +62,7 @@ const Invoice = () => {
       alert("Invoice Added Successfully")
       setCustomerInfo({
         customerName: "",
-        customerEmail: "",
+        customerEmail: "yourgmail@gmail.com",
         mobileNumber: "",
         address: "",
         date: new Date().toGMTString().substring(5,16),
@@ -86,7 +86,7 @@ const Invoice = () => {
     address: "",
     date: new Date().toGMTString().substring(5,16),
   });
-  console.log(productList);
+  
 
   const [products, setProducts] = useState([
     { product: "", quantity: 0, price: 0 },
@@ -100,19 +100,7 @@ const Invoice = () => {
   const handleProductChange = (index, e) => {
     
     const { name, value } = e.target;
-
-    if(name === "product"){
-      productList.find((product)=>{
-        if(product.productName === value){
-          setProductOption([{
-            productName: product.productName,
-            productPrice: product.productPrice
-          }]);}
-      });
-      
-    }
     
-    console.log(productOption);
     setProducts((prevProducts) =>
       prevProducts.map((product, i) =>
         i === index ? { ...product, [name]: value } : product
@@ -162,6 +150,7 @@ const Invoice = () => {
           onChange={handleCustomerInfoChange}
           className="form-control"
           placeholder="Customer Email"
+          disabled = {true}
           
         />
         <label htmlFor="floatingInput">Customer Email</label>
@@ -240,9 +229,12 @@ const Invoice = () => {
                 required
                 >
                   <option value = "0">Select Price</option>
-                  {productOption.map((product,index)=>{
-                    return <option key={index} value={product.productPrice}>{product.productPrice}</option>
-                  })}
+                  {
+                    productList.map((ele,index)=>{
+                      return ele.productName === product.product ? <option key={index} value={ele.productPrice}>{ele.productPrice}</option> : null
+                    })
+
+                  }
                 </select>
               <label htmlFor="floatingInput" className="mx-2">Price</label>
             </div>
@@ -305,7 +297,7 @@ const Invoice = () => {
                 customerMobileNo ={customerInfo.mobileNumber}
                 customerAddress = {customerInfo.address}
                 products={products}
-                cretedAt = {customerInfo.date}
+                date = {customerInfo.date}
                 modalContentRef={modalContentRef}
                 user = {user}
                 
