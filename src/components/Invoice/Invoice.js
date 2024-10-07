@@ -1,101 +1,96 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef, useContext, useEffect} from "react";
 import systemContext from "../../context/systemContext";
 import PrintInvoice from "./PrintInvoice";
 import { useNavigate } from "react-router-dom";
 
+
 const Invoice = () => {
-  const context = useContext(systemContext);
-  const { addInvoice, fetchProduct, productList, getUser } = context;
+  const context = useContext(systemContext)
+  const {addInvoice,fetchProduct,productList,getUser} = context;
   const modalContentRef = useRef(null);
   const navigate = useNavigate();
-  const [productOption, setProductOption] = useState([]);
-  const [user, setUser] = useState({});
+  const [productOption,setProductOption] = useState([]);
+  const [user,setUser] = useState({});
 
-  const getUserDetails = async () => {
+  const getUserDetails = async()=>{
     const userObject = await getUser();
     setUser(userObject);
-  };
-
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
+  }
+  
+  useEffect(()=>{
+    
+    if(!localStorage.getItem('token')){
       alert("Please Login First");
-      navigate("/login", { replace: true });
+      navigate('/login', { replace: true });
     }
     fetchProduct();
     getUserDetails();
-  }, [fetchProduct, getUserDetails, navigate]);
+    
+  },[]);
 
-  const [items, setItems] = useState([]);
+  
+
+  const [items,setItems] = useState([])
+
   const [error, setError] = useState(false);
-
-  const handleAdd = (e) => {
+  
+  const handleAdd = (e)=>{
     e.preventDefault();
-    setError(false); // Reset error state at the start
 
-    if (
-      customerInfo.customerName === "" ||
-      customerInfo.mobileNumber === "" ||
-      customerInfo.address === "" ||
-      items.length === 0
-    ) {
-      alert("Please fill all the fields");
-      setError(true);
-      return;
+    
+    if(customerInfo.customerName === "" || customerInfo.mobileNumber === "" || customerInfo.address === "" || items.length === 0){
+      alert("Please fill all the fields")
+      setError(true)
     }
-
-    if (products.product === "") {
-      alert("Please enter a valid product name");
-      setError(true);
-      return;
+    
+    if(products.product === "") {
+      alert("Please enter a valid product name")
+      setError(true)
     }
-    if (products.quantity < 1) {
-      alert("Please enter a valid quantity");
-      setError(true);
-      return;
+    if(products.quantity < 1){
+      alert("Please enter a valid quantity")
+      setError(true)
     }
-    if (products.price < 1) {
-      alert("Please enter a valid price");
-      setError(true);
-      return;
+    if(products.price < 1){
+      alert("Please enter a valid price")
+      setError(true)
     }
-
-    if (error === false) {
+    if(error === false){
       const randomNumber = Math.floor(1000 + Math.random() * 9000);
-
-      addInvoice(
-        customerInfo.invoiceNo,
-        customerInfo.customerName,
-        customerInfo.customerEmail,
-        customerInfo.mobileNumber,
-        customerInfo.address,
-        items,
-        0,
-        customerInfo.date
-      );
-      alert("Invoice Added Successfully");
-
-      // Reset customer info and products after successful add
+      
+      addInvoice(customerInfo.invoiceNo,customerInfo.customerName,customerInfo.customerEmail,customerInfo.mobileNumber,customerInfo.address,items,0,customerInfo.date)
+      alert("Invoice Added Successfully")
       setCustomerInfo({
         customerName: "",
         customerEmail: "yourgmail@gmail.com",
         mobileNumber: "",
         address: "",
-        date: new Date().toGMTString().substring(5, 16),
+        date: new Date().toGMTString().substring(5,16),
       });
-      setProducts([{ product: "", quantity: 0, price: 0 }]);
+      setProducts([
+        { product: "", quantity: 0, price: 0 },
+      ])
+      
     }
-  };
-
+    else{
+      setError(false)
+    }
+    
+  }
+  const randomNumber = Math.floor(1000 + Math.random() * 9000);
   const [customerInfo, setCustomerInfo] = useState({
-    invoiceNo: Math.floor(1000 + Math.random() * 9000), // Generate on mount
+    invoiceNo:randomNumber ,
     customerName: "",
     customerEmail: "",
     mobileNumber: "",
     address: "",
-    date: new Date().toGMTString().substring(5, 16),
+    date: new Date().toGMTString().substring(5,16),
   });
+  
 
-  const [products, setProducts] = useState([{ product: "", quantity: 0, price: 0 }]);
+  const [products, setProducts] = useState([
+    { product: "", quantity: 0, price: 0 },
+  ]);
 
   const handleCustomerInfoChange = (e) => {
     const { name, value } = e.target;
@@ -103,20 +98,21 @@ const Invoice = () => {
   };
 
   const handleProductChange = (index, e) => {
+    
     const { name, value } = e.target;
-    setProducts((prevProducts) => {
-      const updatedProducts = prevProducts.map((product, i) =>
+    
+    setProducts((prevProducts) =>
+      prevProducts.map((product, i) =>
         i === index ? { ...product, [name]: value } : product
-      );
-      setItems(updatedProducts); // Update items
-      return updatedProducts;
-    });
+      )
+    );
+    setItems(products)
   };
 
   const handleAddProduct = () => {
     setProducts((prevProducts) => [
       ...prevProducts,
-      { product: "", quantity: 0, price: 0 },
+      { name: "", quantity: 0, price: 0 },
     ]);
   };
 
@@ -125,16 +121,13 @@ const Invoice = () => {
       prevProducts.filter((product, i) => i !== index)
     );
   };
-
-  const pdfref = useRef(null);
-  const downloadPdf = () => {
-    if (pdfref.current) {
-      pdfref.current.save(); // Ensure this save method exists in the ref component
-    }
-  };
+  const pdfref = useRef(null)
+  const downloadPdf=()=>{
+   pdfref.current.save();
+  }
 
   return (
-    <form className="container my-4" style={{ maxWidth: "500px" }}>
+    <form className="container my-4" style={{maxWidth:"500px"}}>
       <div className="form-floating mb-3 w-30">
         <input
           type="text"
@@ -157,7 +150,8 @@ const Invoice = () => {
           onChange={handleCustomerInfoChange}
           className="form-control"
           placeholder="Customer Email"
-          disabled={true}
+          disabled = {true}
+          
         />
         <label htmlFor="floatingInput">Customer Email</label>
       </div>
@@ -203,18 +197,16 @@ const Invoice = () => {
                 placeholder="Product Name"
                 required
               >
-                <option value="0">Select Product</option>
-                {productList.map((product, idx) => (
-                  <option key={idx} value={product.productName}>
-                    {product.productName}
-                  </option>
-                ))}
+                <option value = "0">Select Product</option>
+                {productList.map((product,index)=>{
+                  return <option key={index} value={product.productName}>{product.productName}</option>
+                })}
               </select>
-              <label htmlFor="floatingInput" className="mx-2">
-                Product Name
-              </label>
+              
+              
+              <label htmlFor="floatingInput" className="mx-2">Product Name</label>
             </div>
-            <div className="form-floating">
+            <div className="form-floating ">
               <input
                 type="number"
                 name="quantity"
@@ -225,9 +217,7 @@ const Invoice = () => {
                 placeholder="Product Quantity"
                 required
               />
-              <label htmlFor="floatingInput" className="mx-2">
-                Quantity
-              </label>
+              <label htmlFor="floatingInput" className="mx-2">Quantity</label>
             </div>
             <div className="form-floating">
               <select
@@ -237,36 +227,30 @@ const Invoice = () => {
                 className="form-control"
                 id="floatingInput"
                 required
-              >
-                <option value="0">Select Price</option>
-                {productList.map((ele, idx) =>
-                  ele.productName === product.product ? (
-                    <option key={idx} value={ele.productPrice}>
-                      {ele.productPrice}
-                    </option>
-                  ) : null
-                )}
-              </select>
-              <label htmlFor="floatingInput" className="mx-2">
-                Price
-              </label>
+                >
+                  <option value = "0">Select Price</option>
+                  {
+                    productList.map((ele,index)=>{
+                      return ele.productName === product.product ? <option key={index} value={ele.productPrice}>{ele.productPrice}</option> : null
+                    })
+
+                  }
+                </select>
+              <label htmlFor="floatingInput" className="mx-2">Price</label>
             </div>
 
             <button
               className="btn btn-danger mx-3"
-              style={{ maxWidth: "50px", height: "70px" }}
+              style={{maxWidth:"50px",Height:"70px"}}
               type="button"
               onClick={() => handleRemoveProduct(index)}
             >
               <i className="fa-solid fa-trash"></i>
             </button>
+            
           </div>
         ))}
-        <button
-          type="button"
-          className="btn btn-primary me-3 my-5 mb-3"
-          onClick={handleAddProduct}
-        >
+        <button type="button" className="btn btn-primary me-3 my-5 mb-3" onClick={handleAddProduct}>
           <i className="fa-solid fa-plus"></i> Add Product
         </button>
       </div>
@@ -278,8 +262,12 @@ const Invoice = () => {
       >
         <i className="fa-regular fa-file"></i> Preview
       </button>
-      <button type="button" className="btn btn-primary" onClick={handleAdd}>
-        Save
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={handleAdd}
+      >
+      Save
       </button>
       <div
         className="modal fade"
@@ -292,7 +280,7 @@ const Invoice = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Invoice Preview
+                Print Invoice
               </h5>
               <button
                 type="button"
@@ -301,33 +289,33 @@ const Invoice = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body" ref={modalContentRef} style={{ maxHeight: "70vh", overflowY: "auto" }}>
+            <div className="modal-body">
               <PrintInvoice
-                customerName={customerInfo.customerName}
-                customerEmail={customerInfo.customerEmail}
-                mobileNumber={customerInfo.mobileNumber}
-                address={customerInfo.address}
-                invoiceNo={customerInfo.invoiceNo}
-                date={customerInfo.date}
-                items={items}
-                ref={pdfref}
+                invoiceNo = {customerInfo.invoiceNo}
+                customerName ={customerInfo.customerName}
+                customerEmail = {customerInfo.customerEmail}
+                customerMobileNo ={customerInfo.mobileNumber}
+                customerAddress = {customerInfo.address}
+                products={products}
+                date = {customerInfo.date}
+                modalContentRef={modalContentRef}
+                user = {user}
+                
               />
             </div>
             <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary" onClick={downloadPdf}>
-                Download Invoice
-              </button>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
             </div>
           </div>
         </div>
       </div>
+
     </form>
   );
 };
