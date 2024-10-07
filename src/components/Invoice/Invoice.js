@@ -10,6 +10,8 @@ const Invoice = () => {
   const navigate = useNavigate();
   const [productOption, setProductOption] = useState([]);
   const [user, setUser] = useState({});
+  const [items, setItems] = useState([]);
+  const [error, setError] = useState(false);
 
   const getUserDetails = async () => {
     const userObject = await getUser();
@@ -20,17 +22,31 @@ const Invoice = () => {
     if (!localStorage.getItem("token")) {
       alert("Please Login First");
       navigate("/login", { replace: true });
+      return;
     }
-    fetchProduct();
-    getUserDetails();
-  }, [fetchProduct, getUserDetails, navigate]);
+  
+    const loadData = async () => {
+      await fetchProduct();
+      await getUserDetails();
+    };
+  
+    loadData();
+  }, [navigate]);
 
-  const [items, setItems] = useState([]);
-  const [error, setError] = useState(false);
+  const [customerInfo, setCustomerInfo] = useState({
+    invoiceNo: Math.floor(1000 + Math.random() * 9000),
+    customerName: "",
+    customerEmail: "",
+    mobileNumber: "",
+    address: "",
+    date: new Date().toGMTString().substring(5, 16),
+  });
+
+  const [products, setProducts] = useState([{ product: "", quantity: 0, price: 0 }]);
 
   const handleAdd = (e) => {
     e.preventDefault();
-    setError(false); // Reset error state at the start
+    setError(false);
 
     if (
       customerInfo.customerName === "" ||
@@ -60,8 +76,6 @@ const Invoice = () => {
     }
 
     if (error === false) {
-      const randomNumber = Math.floor(1000 + Math.random() * 9000);
-
       addInvoice(
         customerInfo.invoiceNo,
         customerInfo.customerName,
@@ -74,7 +88,6 @@ const Invoice = () => {
       );
       alert("Invoice Added Successfully");
 
-      // Reset customer info and products after successful add
       setCustomerInfo({
         customerName: "",
         customerEmail: "yourgmail@gmail.com",
@@ -85,17 +98,6 @@ const Invoice = () => {
       setProducts([{ product: "", quantity: 0, price: 0 }]);
     }
   };
-
-  const [customerInfo, setCustomerInfo] = useState({
-    invoiceNo: Math.floor(1000 + Math.random() * 9000), // Generate on mount
-    customerName: "",
-    customerEmail: "",
-    mobileNumber: "",
-    address: "",
-    date: new Date().toGMTString().substring(5, 16),
-  });
-
-  const [products, setProducts] = useState([{ product: "", quantity: 0, price: 0 }]);
 
   const handleCustomerInfoChange = (e) => {
     const { name, value } = e.target;
@@ -108,7 +110,7 @@ const Invoice = () => {
       const updatedProducts = prevProducts.map((product, i) =>
         i === index ? { ...product, [name]: value } : product
       );
-      setItems(updatedProducts); // Update items
+      setItems(updatedProducts);
       return updatedProducts;
     });
   };
@@ -129,7 +131,7 @@ const Invoice = () => {
   const pdfref = useRef(null);
   const downloadPdf = () => {
     if (pdfref.current) {
-      pdfref.current.save(); // Ensure this save method exists in the ref component
+      pdfref.current.save();
     }
   };
 
@@ -204,11 +206,15 @@ const Invoice = () => {
                 required
               >
                 <option value="0">Select Product</option>
-                {productList.map((product, idx) => (
-                  <option key={idx} value={product.productName}>
-                    {product.productName}
-                  </option>
-                ))}
+                {productList && productList.length > 0 ? (
+                  productList.map((product, idx) => (
+                    <option key={idx} value={product.productName}>
+                      {product.productName}
+                    </option>
+                  ))
+                ) : (
+                  <option value="0">No Products Available</option>
+                )}
               </select>
               <label htmlFor="floatingInput" className="mx-2">
                 Product Name
@@ -292,7 +298,7 @@ const Invoice = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Invoice Preview
+                Invoice
               </h5>
               <button
                 type="button"
@@ -301,28 +307,28 @@ const Invoice = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body" ref={modalContentRef} style={{ maxHeight: "70vh", overflowY: "auto" }}>
+            <div className="modal-body" ref={modalContentRef}>
               <PrintInvoice
-                customerName={customerInfo.customerName}
-                customerEmail={customerInfo.customerEmail}
-                mobileNumber={customerInfo.mobileNumber}
-                address={customerInfo.address}
-                invoiceNo={customerInfo.invoiceNo}
-                date={customerInfo.date}
+                customerInfo={customerInfo}
                 items={items}
+                products={products}
                 ref={pdfref}
               />
             </div>
             <div className="modal-footer">
               <button
                 type="button"
+                className="btn btn-primary"
+                onClick={downloadPdf}
+              >
+                Download PDF
+              </button>
+              <button
+                type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Close
-              </button>
-              <button type="button" className="btn btn-primary" onClick={downloadPdf}>
-                Download Invoice
               </button>
             </div>
           </div>
