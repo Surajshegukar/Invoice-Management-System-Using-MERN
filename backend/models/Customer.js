@@ -13,7 +13,7 @@ const CustomerSchema = new Schema({
     },
     customerEmail:{
         type: String,
-        required : true
+        
     },
     customerMobileNo:{
         type: Number,

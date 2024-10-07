@@ -18,7 +18,7 @@ router.get("/fetchallinvoice", fetchuser, async (req, res) => {
 router.post("/addinvoice",fetchuser,[
     body("invoiceNumber", "Enter the valid invoice Number").isNumeric(),
     body("customerName", "Enter the vaild Name").isLength({ min: 3 }),
-    body("customerEmail", "Enter the valid Email").isLength({ min: 3 }),
+    
     body("customerMobileNo", "Enter the valid Mobile Number").isNumeric(),
     body("customerAddress", "Enter the valid Address").isLength({ min: 3 }),
   ], async (req, res) => {
@@ -26,7 +26,7 @@ router.post("/addinvoice",fetchuser,[
       const {
         invoiceNumber,
         customerName,
-        customerEmail,
+        
         customerMobileNo,
         customerAddress,
         items,
@@ -41,7 +41,7 @@ router.post("/addinvoice",fetchuser,[
       const invoice = new Invoice({
         invoiceNumber,
         customerName,
-        customerEmail,
+        
         customerMobileNo,
         customerAddress,
         items,
@@ -74,7 +74,7 @@ router.put('/updateinvoice/:id', fetchuser, async (req, res) => {
     const {
       invoiceNumber,
       customerName,
-      customerEmail,
+      
       customerMobileNo,
       customerAddress,
       items,
@@ -83,7 +83,7 @@ router.put('/updateinvoice/:id', fetchuser, async (req, res) => {
 
     existingInvoice.invoiceNumber = invoiceNumber || existingInvoice.invoiceNumber;
     existingInvoice.customerName = customerName || existingInvoice.customerName;
-    existingInvoice.customerEmail = customerEmail || existingInvoice.customerEmail;
+    
     existingInvoice.customerMobileNo = customerMobileNo || existingInvoice.customerMobileNo;
     existingInvoice.customerAddress = customerAddress || existingInvoice.customerAddress;
     existingInvoice.items = items || existingInvoice.items;
