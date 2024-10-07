@@ -16,7 +16,6 @@ const invoiceSchema = new Schema({
     },
   customerEmail: {
     type: String,
-    required: true,
 
   },
   customerMobileNo: {
